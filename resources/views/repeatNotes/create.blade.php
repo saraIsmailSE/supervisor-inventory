@@ -11,7 +11,7 @@
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-start">
             <ol class="breadcrumb">
                 {{-- <li class="breadcrumb-item active" aria-current="page">Repeated Notes</li> --}}
-                <li class="breadcrumb-item"><a href="{{route('index')}}">عرض الملاحظات</a></li>
+                <li class="breadcrumb-item"><a href="{{route('notes.index')}}">عرض الملاحظات</a></li>
             </ol>
         </nav>
     </div>
@@ -34,7 +34,7 @@
 
 @section('content')  
  <div id="basic-horizontal-layouts">
-    <form action="{{route('store')}}" enctype="multipart/form-data" method="POST">
+    <form action="{{route('notes.store')}}" enctype="multipart/form-data" method="POST">
         @csrf
 
     <div class="row match-height">  
@@ -50,7 +50,7 @@
                             <div class="row">                     
                                 <div class="col-md-8 form-group">
                                     @foreach ($leaders as $item)
-                                            <input type="checkbox" name="didnt_publish_news[]" value="{{$item->name}}" id="didnt_publish_news"> 
+                                            <input type="checkbox" name="didnt_publish_news[]" value="{{$item->name}}"> 
                                             <label for="">{{$item->name}}</label> <br>
                                     @endforeach                      
                                 </div>

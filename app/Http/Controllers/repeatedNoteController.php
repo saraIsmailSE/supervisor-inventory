@@ -32,19 +32,25 @@ class repeatedNoteController extends Controller
 
     
     public function store(Request $request)
-    {   
-        $data = RepeatedNote::create([     
+    {    
+        $post_late_array             =  serialize(array($request->post_late));
+        $light_week_array            =  serialize(array($request->light_week));
+        $didnt_publish_news_array    =  serialize(array($request->didnt_publish_news));
+        $deputized_for_array         =  serialize(array($request->deputized_for));
+        $elementary_marks_late_array =  serialize(array($request->elementary_marks_late));
+        
+        $data = RepeatedNote::create([ 
+
             'supervisor_id'        =>Auth::id(),
             'week_id'              =>Week::latest('id')->first()->id,
-            'post_late'            =>implode(' ، ' , $request->post_late),
-            'light_week'           =>implode(' ، ' , $request->light_week),
-            'didnt_publish_news'   =>implode(' ، ' , $request->didnt_publish_news),
-            'deputized_for'        =>implode(' ، ' , $request->deputized_for),
-            'elementary_marks_late'=>implode(' ، ' , $request->elementary_marks_late),
+            'post_late'            =>$post_late_array,
+            'light_week'           =>$light_week_array,
+            'didnt_publish_news'   =>$didnt_publish_news_array,
+            'deputized_for'        =>$deputized_for_array,
+            'elementary_marks_late'=>$elementary_marks_late_array,
         ]);
-         return redirect()->route('index');    
+         return redirect()->route('notes.index');    
     }
-
     
     public function show($id)
     {

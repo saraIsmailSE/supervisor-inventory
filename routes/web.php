@@ -48,12 +48,15 @@ Route::get('/show', function () {
 });
 
  Route::group(['prefix'=>'notes'], function(){
-     Route::get('/show/{id}',    'repeatedNoteController@show')->name('show');
-     Route::post('/store',       'repeatedNoteController@store')->name('notesstore');
-     Route::get('/',             'repeatedNoteController@index')->name('index');
-     Route::get('/create',      'repeatedNoteController@create')->name('create');
-     Route::post('/update',     'repeatedNoteController@update')->name('update');
-     Route::post('/delete/{id}','repeatedNoteController@delete')->name('delete');
+
+     Route::get('/show/{id}',    'repeatedNoteController@show')->name('notes.show');
+     Route::post('/store',       'repeatedNoteController@store')->name('notes.store');
+     Route::get('/',             'repeatedNoteController@index')->name('notes.index');
+     Route::get('/create',      'repeatedNoteController@create')->name('notes.create');
+     Route::post('/update',     'repeatedNoteController@update')->name('notes.update');
+     Route::post('/delete/{id}','repeatedNoteController@delete')->name('notes.delete');
+
+    
     });  
     // Route::resource('notes', repeatedNoteController::class); 
 
