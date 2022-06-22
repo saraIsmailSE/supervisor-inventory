@@ -142,23 +142,25 @@ class LeaderDutyController extends Controller
 
     public function show( leaderduty $leaderduty,Request $request )
     {
-       $week=Week::latest()->first();
-       $originalLeaderduty=LeaderDuty::where('week_id',$week->id)->where('supervisor_id',Auth::id())->get();
-       $duty=[];
-       $leaderduty['originalLeaderduty']=$originalLeaderduty;
-        // print_r($leaderduty['originalLeaderduty'][0]->leader_id); die();
-        foreach( $leaderduty['originalLeaderduty'] as $duty){
-           // print_r($duty->follow_up_post); die();
-
-            $duty->follow_up_post= unserialize($duty->follow_up_post);
-            $duty->support_post=unserialize($duty->support_post);
-            $duty->news_leader=unserialize($duty->news_leader);
-            $duty->elementary_mark=unserialize($duty->elementary_mark);
-            $duty->audit_final_mark=unserialize($duty->audit_final_mark);
-            $duty->withdrawn_ambassadors=unserialize($duty->withdrawn_ambassadors);
+        $week = Week::latest()->first();
+        $leaderduty = LeaderDuty::where('week_id', $week->id)->where('supervisor_id', Auth::id())->get();
+        foreach ($leaderduty as $duty) {
+            $duty->follow_up_post = unserialize($duty->follow_up_post);
+            $duty->support_post = unserialize($duty->support_post);
+            $duty->news_leader = unserialize($duty->news_leader);
+            $duty->elementary_mark = unserialize($duty->elementary_mark);
+            $duty->audit_final_mark = unserialize($duty->audit_final_mark);
+            $duty->withdrawn_ambassadors = unserialize($duty->withdrawn_ambassadors);
         }
-        //print_r($leaderduty['originalLeaderduty'][0]->follow_up_post); die();
-        return view('result')->with('leaderduty',$leaderduty);
+
+
+        foreach ($leaderduty as $duty) {
+            print_r($duty->audit_final_mark[0]['audit_final_mark']);
+            echo "<br> --------------- <br>";
+        }
+
+
+        //    return view('result')->with('leaderduty',$leaderduty);
 
 
 
